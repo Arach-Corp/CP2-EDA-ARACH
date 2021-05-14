@@ -1,0 +1,14 @@
+================== Integrantes ====================
+===================================================
+#   NOME                          #      RM       #
+===================================================
+#   Enrique Oliveira Caribé       #     85584     #
+#   Jacó Magalhães I Sen Chen     #     84717     #
+#   João Victor Pessoa Queiroz    #     85568     #
+#   Victor Yafusso Sunahara       #     84095     #
+===================================================
+
+
+OBS: Optamos por implementar o nosso modelo de dados da challenge (diagrama no arquivo modelo_relacional.pdf),
+implementamos quase todas as tabelas do modelo, faltando apenas a tabela T_USER_DISPOSITIVO (tabela associativa entre usuario e dispositivos)
+pois a tabela possui chave composta formada por FKs das outras tabelas.
