@@ -2,13 +2,17 @@ package br.com.fiap.application;
 
 import br.com.fiap.dao.DAO;
 import br.com.fiap.dao.exceptions.CommitException;
+import br.com.fiap.dao.generic.UserDispositivoDAO;
 import br.com.fiap.dao.impl.*;
 import br.com.fiap.entities.*;
+import br.com.fiap.entities.pk.UserDispositivoPK;
 import br.com.fiap.singleton.EntityManagerFactorySingleton;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
@@ -27,9 +31,19 @@ public class Main {
             e.printStackTrace();
         }
 
-
-        DAO<Dispositivo, Long> dispositivoDAO = new DispositivoDAOImpl(em);
         Dispositivo dispositivo =new Dispositivo(null, "Dispensa Casa 1", "sad56as7d56as7d89sad53a");
+
+        UserDispositivoPK userDispositivoPK = new UserDispositivoPK(user, dispositivo);
+        UserDispositivo userDispositivo = new UserDispositivo(userDispositivoPK, true);
+        List<UserDispositivo> usuarios = new ArrayList<UserDispositivo>();
+
+        usuarios.add(userDispositivo);
+        dispositivo.setUsuarios(usuarios);
+
+        UserDispositivoDAO userDispositivoDAO = new UserDispositivoDAOImpl(em);
+        DAO<Dispositivo, Long> dispositivoDAO = new DispositivoDAOImpl(em);
+
+
         try {
             dispositivoDAO.insert(dispositivo);
             dispositivoDAO.commit();
@@ -38,6 +52,13 @@ public class Main {
             e.printStackTrace();
         }
 
+        try {
+            userDispositivoDAO.insert(userDispositivo);
+            userDispositivoDAO.commit();
+            System.out.println("Usuário cadastrado no dispositivo com sucesso!");
+        }catch (CommitException e) {
+            e.printStackTrace();
+        }
 
         DAO<Produto, Long> produtoDAO = new ProdutoDAOImpl(em);
         Produto produto = new Produto(null, "Achocolatado Nescau Radical", "Achocolatado integral", "Nestlé", "url_foto");
@@ -91,7 +112,11 @@ public class Main {
             e.printStackTrace();
         }
 
+
+
         emf.close();
         em.close();
     }
+
+
 }

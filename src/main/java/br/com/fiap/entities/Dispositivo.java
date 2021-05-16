@@ -27,6 +27,8 @@ public class Dispositivo {
     @CreationTimestamp
     private LocalDateTime dataCadastro;
 
+
+
     @OneToMany(mappedBy = "id.dispositivo")
     private List<UserDispositivo> usuarios = new ArrayList<>();
 
@@ -84,6 +86,13 @@ public class Dispositivo {
         return itemsDispensa;
     }
 
+    public void setUsuarios(List<UserDispositivo> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public void setItemsDispensa(List<ItemDispensa> itemsDispensa) {
+        this.itemsDispensa = itemsDispensa;
+    }
     @Override
     public String toString() {
         return "Dispositivo{" +

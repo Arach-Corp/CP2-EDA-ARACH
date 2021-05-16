@@ -20,6 +20,12 @@ public class UserDispositivo {
     @Column(name = "dt_cadastro", updatable = false)
     private LocalDateTime dataCadastro;
 
+    public UserDispositivo(UserDispositivoPK id, boolean principal) {
+        this.id = id;
+        this.principal = principal;
+    }
+
+    public UserDispositivo(){}
 
     public UserDispositivoPK getId() {
         return id;
